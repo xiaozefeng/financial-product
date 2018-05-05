@@ -12,8 +12,9 @@ import java.util.Date;
 /**
  * @author xiaozefeng
  */
-@Data
 @Entity
+@Table(name = "tb_order")
+@Data
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 5755877074387678336L;
@@ -63,6 +64,4 @@ public class Order implements Serializable {
      * 更新时间
      */
     private Date updatedTime;
-
-
 }

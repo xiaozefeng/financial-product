@@ -1,11 +1,7 @@
-
-
-group 'com.imooc'
-version '1.0-SNAPSHOT'
-
 apply from : "$rootDir/dependencies.gradle"
+allprojects {
 
-
+}
 
 subprojects {
     apply plugin: 'java'
@@ -21,6 +17,7 @@ subprojects {
     }
     dependencies {
         compile libs.common
+        compile libs.lombok
         testCompile libs.test
     }
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'

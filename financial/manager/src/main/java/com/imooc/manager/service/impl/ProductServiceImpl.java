@@ -4,13 +4,18 @@ import com.imooc.entity.Product;
 import com.imooc.entity.enums.ProductStatusEnum;
 import com.imooc.manager.repositories.ProductRepository;
 import com.imooc.manager.service.ProductService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -18,7 +23,6 @@ import java.util.regex.Pattern;
  * @date 2018/5/4 下午5:22
  */
 @Service
-@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     Pattern pattern = Pattern.compile("[0-9]*");
@@ -45,6 +49,32 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findOne(projectId);
     }
 
+    @Override
+    public Page<Product> findAll(List<String> idList, BigDecimal minRewardRate, BigDecimal maxRewardRate, List<ProductStatusEnum> productStatusList, Pageable pageable) {
+
+        return productRepository.findAll((root, query, cb) -> {
+            Path<String> idCol = root.get("id");
+            Path<BigDecimal> rewardRateCol = root.get("rewardRate");
+            Path<ProductStatusEnum> statusCol = root.get("status");
+
+            List<Predicate> predicates = new ArrayList<>();
+            if (idList != null && idList.size() > 0) {
+                predicates.add(idCol.in(idList));
+            }
+            if (BigDecimal.ZERO.compareTo(minRewardRate) < 0) {
+                predicates.add(cb.ge(rewardRateCol, minRewardRate));
+            }
+            if (BigDecimal.ZERO.compareTo(maxRewardRate) < 0) {
+                predicates.add(cb.le(rewardRateCol, maxRewardRate));
+            }
+            if (productStatusList != null && productStatusList.size() > 0) {
+                predicates.add(statusCol.in(productStatusList));
+            }
+            query.where(predicates.toArray(new Predicate[0]));
+            return null;
+        }, pageable);
+    }
+
     /**
      * 数据校验
      * 1. 非空数据
@@ -55,10 +85,6 @@ public class ProductServiceImpl implements ProductService {
      */
     private void check(Product product) {
         Assert.notNull(product.getId(), "编号不能为空");
-
-        BigDecimal rewardRate = product.getRewardRate();
-        Assert.isTrue(BigDecimal.ZERO.compareTo(rewardRate) > 0 &&
-                rewardRate.compareTo(BigDecimal.valueOf(30)) <= 0, "收益率范围为 0~30");
 
         Assert.isTrue(pattern.matcher(product.getStepAmount().toString()).matches(), "投资步长需要为整数");
     }

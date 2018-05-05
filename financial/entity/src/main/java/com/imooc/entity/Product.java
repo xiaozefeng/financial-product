@@ -11,8 +11,9 @@ import java.util.Date;
 /**
  * @author xiaozefeng
  */
-@Data
 @Entity
+@Table(name = "tb_product")
+@Data
 public class Product implements Serializable {
 
 
@@ -45,7 +46,6 @@ public class Product implements Serializable {
      * 产品状态: 销售中,锁定,已结束
      *
      * @see ProductStatusEnum
-     *
      */
     @Enumerated(EnumType.STRING)
     private ProductStatusEnum status;

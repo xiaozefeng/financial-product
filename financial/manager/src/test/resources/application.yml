@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:manager;DB_CLOSE_ON_EXIT=FALSE
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+server:
+  context-path: /manager
