@@ -10,3 +10,7 @@ spring:
     show-sql: true
 server:
   context-path: /manager
+
+swagger:
+  groupName: manager
+  basePackage: com.imooc.manager.controller
