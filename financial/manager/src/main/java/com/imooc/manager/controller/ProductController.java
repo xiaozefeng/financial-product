@@ -3,6 +3,7 @@ package com.imooc.manager.controller;
 import com.imooc.entity.Product;
 import com.imooc.entity.enums.ProductStatusEnum;
 import com.imooc.manager.service.ProductService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.List;
  * @author xiaozefeng
  * @date 2018/5/4 下午6:05
  */
-@RequestMapping("/product")
+@RequestMapping("/products")
 @RestController
 @Slf4j
 public class ProductController {
@@ -35,6 +36,7 @@ public class ProductController {
      * @param product
      * @return
      */
+    @ApiOperation(value = "创建产品", notes = "根据对应的业务规则创建响应的产品")
     @PostMapping
     public Product addProject(@RequestBody Product product) {
         log.info("请求参数:{}", product);
@@ -54,7 +56,7 @@ public class ProductController {
     }
 
 
-    @GetMapping("")
+    @GetMapping
     public Page<Product> getAll(String ids,
                                 BigDecimal minRewardRate,
                                 BigDecimal maxRewardRate,

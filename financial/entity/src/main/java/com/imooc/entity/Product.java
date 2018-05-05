@@ -1,6 +1,7 @@
 package com.imooc.entity;
 
 import com.imooc.entity.enums.ProductStatusEnum;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -47,6 +48,7 @@ public class Product implements Serializable {
      *
      * @see ProductStatusEnum
      */
+    @ApiModelProperty(value = "产品状态", dataType = "com.imooc.entity.enums.ProductStatusEnum")
     @Enumerated(EnumType.STRING)
     private ProductStatusEnum status;
     /**

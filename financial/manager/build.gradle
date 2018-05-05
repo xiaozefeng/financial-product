@@ -1,4 +1,5 @@
 dependencies{
     compile project(":entity")
+    compile project(":swagger")
     runtime libs.mysql
 }
