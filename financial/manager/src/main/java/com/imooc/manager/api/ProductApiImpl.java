@@ -6,8 +6,9 @@ import com.imooc.api.dto.ProductRequest;
 import com.imooc.entity.Product;
 import com.imooc.manager.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * api实现
@@ -22,13 +23,13 @@ public class ProductApiImpl implements ProductApi {
     private ProductService productService;
 
     @Override
-    public Page<Product> query(ProductRequest productRequest) {
+    public List<Product> query(ProductRequest productRequest) {
         log.info("查询多个产品:{}", productRequest);
         return productService.findAll(productRequest.getIdList(),
                 productRequest.getMinRewardRate(),
                 productRequest.getMaxRewardRate(),
                 productRequest.getProductStatusList(),
-                productRequest.getPageable());
+                null).getContent();
     }
 
     @Override

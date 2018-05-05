@@ -6,6 +6,7 @@ import com.imooc.manager.repositories.ProductRepository;
 import com.imooc.manager.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -55,7 +56,9 @@ public class ProductServiceImpl implements ProductService {
                                  BigDecimal maxRewardRate,
                                  List<ProductStatusEnum> productStatusList,
                                  Pageable pageable) {
-
+        if (pageable == null) {
+            pageable = new PageRequest(0, 1000);
+        }
         return productRepository.findAll((root, query, cb) -> {
             Path<String> idCol = root.get("id");
             Path<BigDecimal> rewardRateCol = root.get("rewardRate");

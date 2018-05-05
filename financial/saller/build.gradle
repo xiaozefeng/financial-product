@@ -1,3 +1,7 @@
 dependencies{
     compile project(":api")
 }
+
+configurations {
+    compile.exclude module: 'spring-boot-starter-data-jpa'
+}

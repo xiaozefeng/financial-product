@@ -4,7 +4,6 @@ import com.imooc.entity.enums.ProductStatusEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,5 +24,4 @@ public class ProductRequest implements Serializable {
     private BigDecimal minRewardRate;
     private BigDecimal maxRewardRate;
     private List<ProductStatusEnum> productStatusList;
-    private Pageable pageable;
 }
