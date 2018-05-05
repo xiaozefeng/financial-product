@@ -1,8 +1,11 @@
 package com.imooc.swagger.configuration;
 
+import com.imooc.swagger.config.SwaggerInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -19,17 +22,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author xiaozefeng
  * @date 2018/5/5 下午12:56
  */
-
+@ComponentScan(basePackages = "com.imooc.swagger")
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    private final SwaggerInfo swaggerInfo;
-
     @Autowired
-    public SwaggerConfiguration(SwaggerInfo swaggerInfo) {
-        this.swaggerInfo = swaggerInfo;
-    }
+    private SwaggerInfo swaggerInfo;
 
     @Bean
     public Docket controllerApi() {

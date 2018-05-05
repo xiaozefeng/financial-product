@@ -18,6 +18,9 @@ ext {
                     "org.springframework.boot:spring-boot-starter-test:${versions.springBootVersion}",
                     'com.h2database:h2:1.4.195'
             ],
+            jsonrpc:[
+                "com.github.briandilley.jsonrpc4j:jsonrpc4j:1.5.3"
+            ],
             lombok:[
                     'org.projectlombok:lombok:1.16.20'
             ],

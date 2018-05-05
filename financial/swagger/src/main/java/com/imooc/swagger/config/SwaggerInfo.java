@@ -1,4 +1,4 @@
-package com.imooc.swagger.configuration;
+package com.imooc.swagger.config;
 
 import lombok.Getter;
 import lombok.Setter;

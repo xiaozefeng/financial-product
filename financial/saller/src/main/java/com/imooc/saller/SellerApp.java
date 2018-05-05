@@ -1,18 +1,17 @@
-package com.imooc;
+package com.imooc.saller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 启动类
+ * 销售端启动类
  *
  * @author xiaozefeng
- * @date 2018/5/4 下午5:15
+ * @date 2018/5/5 下午3:43
  */
 @SpringBootApplication
-public class ManagerApp {
-
+public class SellerApp {
     public static void main(String[] args) {
-        SpringApplication.run(ManagerApp.class, args);
+        SpringApplication.run(SellerApp.class, args);
     }
 }

@@ -50,7 +50,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findAll(List<String> idList, BigDecimal minRewardRate, BigDecimal maxRewardRate, List<ProductStatusEnum> productStatusList, Pageable pageable) {
+    public Page<Product> findAll(List<String> idList,
+                                 BigDecimal minRewardRate,
+                                 BigDecimal maxRewardRate,
+                                 List<ProductStatusEnum> productStatusList,
+                                 Pageable pageable) {
 
         return productRepository.findAll((root, query, cb) -> {
             Path<String> idCol = root.get("id");
